@@ -1,11 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.gms)
+
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.plugin.serialization)
+    id("com.google.devtools.ksp")
 }
 
 android {
     namespace = "com.example.drivingschoolapp"
-    compileSdk = 34
+    compileSdk = 35
+
 
     defaultConfig {
         applicationId = "com.example.drivingschoolapp"
@@ -38,6 +44,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding= true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -50,6 +57,23 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.coil.compose)
+    ksp(libs.androidx.room.compiler)
+
+
+    implementation(libs.androidx.room.runtime)
+    implementation (libs.androidx.runtime.livedata)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    annotationProcessor(libs.androidx.room.room.compiler)
+
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
